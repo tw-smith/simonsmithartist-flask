@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Simon Smith</title>
+    <link href="../static/common.css" rel="stylesheet">
+    <script src="../static/utilities.js" defer></script>
+    {% block head %}{% endblock %}
+</head>
+<body class="page-container">
+{%  include "navbar.html" %}
+{#    <nav class="navbar">#}
+{#        <h1 class="navbar__section navbar__item navbar__header">Simon Smith</h1>#}
+{#        <ul class="navbar__section">#}
+{#            <li id="hamburgerToggle">#}
+{#                <img src="../static/assets/icons8-hamburger-menu-48.png"#}
+{#                     height="40px"#}
+{#                     width="40px"#}
+{#                     alt="The hamburger menu icon"#}
+{#                     id="openIcon">#}
+{#                <img src="../static/assets/icons8-multiply-48.png"#}
+{#                     height="40px"#}
+{#                     width="40px"#}
+{#                     alt="Menu close icon"#}
+{#                     id="closeIcon">#}
+{#            </li>#}
+{##}
+{#        </ul>#}
+{#        <ul class="hamburgerMenu">#}
+{#            <li class="navbar__item">About</li>#}
+{#            <li class="navbar__item">Latest Paintings</li>#}
+{#            <li class="navbar__item">Acrylics & Oils</li>#}
+{#            <li class="navbar__item">Watercolours</li>#}
+{#            <li class="navbar__item">Contact</li>#}
+{#        </ul>#}
+{##}
+{#    </nav>#}
+    {% block body %}{% endblock %}
+<footer class="footer">
+    <p class="acknowledgements">
+        Site by <a href="https://tw-smith.me" target="_blank">Toby Smith</a>.
+        Icons by <a href="https://icons8.com" target="_blank">icons8</a>
+    </p>
+    <p class="acknowledgements">
+        Copyright © 2023 Simon Smith
+    </p>
+</footer>
+</body>
+</html>

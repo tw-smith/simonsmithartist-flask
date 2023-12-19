@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="pagecontent-container">
+    <ul>
+    {% for product in product_list %}
+        <li>
+            <a href="/product/{{ product.product.id }}">
+                <figure  class="figure">
+                    <img src='{{ product.product.images[0] }}' alt="A photo of a painting">
+                </figure>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
+{%  endblock %}

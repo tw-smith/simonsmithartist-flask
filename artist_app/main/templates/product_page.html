@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="pagecontent-container">
+        <figure class="figure">
+            <img src="{{ product.images[0] }}" alt="A photo of a painting">
+        </figure>
+        <p>{{ price_string }}</p>
+        <p> {{ product.name }}</p>
+        <p> {{ product.description }}</p>
+    </div>
+{%  endblock %}
