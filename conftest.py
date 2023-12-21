@@ -1,95 +1,34 @@
 import pytest
+
 import stripe
+from artist_app import create_app
+from config import TestConfig
+
+test_price_id_eur = "price_1OPSeWDKpC50uLWTA6KTz4ZC"
+test_price_id_usd = "price_1OPSijDKpC50uLWTBywD3inB"
+test_price_id_gbp = "price_1OPSjLDKpC50uLWTk4XtZZqD"
+
+
+@pytest.fixture()
+def app():
+    app = create_app(TestConfig)
+    yield app
+
 
 @pytest.fixture(scope="function")
-def get_test_price_object_gbp():
-    price_gbp = {
-      "id": "price_1MoBy5LkdIwHu7ixZhnattbh",
-      "object": "price",
-      "active": True,
-      "billing_scheme": "per_unit",
-      "created": 1679431181,
-      "currency": "gbp",
-      "custom_unit_amount": 1234,
-      "livemode": False,
-      "lookup_key": None,
-      "metadata": {},
-      "nickname": None,
-      "product": "prod_NZKdYqrwEYx6iK",
-      "recurring": {
-        "aggregate_usage": None,
-        "interval": "month",
-        "interval_count": 1,
-        "trial_period_days": None,
-        "usage_type": "licensed"
-      },
-      "tax_behavior": "unspecified",
-      "tiers_mode": None,
-      "transform_quantity": None,
-      "type": "recurring",
-      "unit_amount": 1000,
-      "unit_amount_decimal": "1000"
-}
-    yield price_gbp
+def get_test_price_object_gbp(app):
+    stripe.api_key = app.config['STRIPE_SECRET_API_KEY_DEV']
+    print(f"API KEY: {app.config['STRIPE_SECRET_API_KEY_DEV']}")
+    yield stripe.Price.retrieve(test_price_id_gbp)
+
 
 @pytest.fixture(scope="function")
-def get_test_price_object_usd():
-    price_usd = {
-      "id": "price_1MoBy5LkdIwHu7ixZhnattbh",
-      "object": "price",
-      "active": True,
-      "billing_scheme": "per_unit",
-      "created": 1679431181,
-      "currency": "usd",
-      "custom_unit_amount": 1234,
-      "livemode": False,
-      "lookup_key": None,
-      "metadata": {},
-      "nickname": None,
-      "product": "prod_NZKdYqrwEYx6iK",
-      "recurring": {
-        "aggregate_usage": None,
-        "interval": "month",
-        "interval_count": 1,
-        "trial_period_days": None,
-        "usage_type": "licensed"
-      },
-      "tax_behavior": "unspecified",
-      "tiers_mode": None,
-      "transform_quantity": None,
-      "type": "recurring",
-      "unit_amount": 1000,
-      "unit_amount_decimal": "1000"
-}
-    yield price_usd
+def get_test_price_object_usd(app):
+    stripe.api_key = app.config['STRIPE_SECRET_API_KEY_DEV']
+    yield stripe.Price.retrieve(test_price_id_usd)
+
 
 @pytest.fixture(scope="function")
-def get_test_price_object_eur():
-    price_eur = {
-      "id": "price_1MoBy5LkdIwHu7ixZhnattbh",
-      "object": "price",
-      "active": True,
-      "billing_scheme": "per_unit",
-      "created": 1679431181,
-      "currency": "eur",
-      "custom_unit_amount": 1234,
-      "livemode": False,
-      "lookup_key": None,
-      "metadata": {},
-      "nickname": None,
-      "product": "prod_NZKdYqrwEYx6iK",
-      "recurring": {
-        "aggregate_usage": None,
-        "interval": "month",
-        "interval_count": 1,
-        "trial_period_days": None,
-        "usage_type": "licensed"
-      },
-      "tax_behavior": "unspecified",
-      "tiers_mode": None,
-      "transform_quantity": None,
-      "type": "recurring",
-      "unit_amount": 1000,
-      "unit_amount_decimal": "1000"
-}
-    yield price_eur
+def get_test_price_object_eur(app):
+    stripe.api_key = app.config['STRIPE_SECRET_API_KEY_DEV']
+    yield stripe.Price.retrieve(test_price_id_eur)

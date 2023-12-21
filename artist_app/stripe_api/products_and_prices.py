@@ -1,11 +1,10 @@
 import stripe
 from stripe import ListObject, Product, Price
-from pydantic import BaseModel
 from flask import current_app
 from artist_app import cache
 from dataclasses import dataclass
-#TODO rather than hitting the Stripe API every time, use flask-caching to cache product and price list on first home
-# page visit then hit Stripe API again when on product detail page to make sure the product is still available
+
+#TODO then hit Stripe API again when on product detail page to make sure the product is still available
 
 
 @dataclass
