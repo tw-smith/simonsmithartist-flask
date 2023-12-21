@@ -11,12 +11,12 @@ class Config(object):
 
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'artist_app/db/db_prod.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'artist_app/database/db_prod.database')
 
 
 class DevConfig(Config):
     STRIPE_SECRET_API_KEY_DEV = os.environ.get('STRIPE_SECRET_API_KEY_DEV')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'artist_app/db/db_dev.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'artist_app/database/db_dev.db')
 
 
 class TestConfig(Config):
