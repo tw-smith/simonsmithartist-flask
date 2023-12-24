@@ -8,6 +8,7 @@ class Config(object):
     APP_TITLE = 'Simon Smith Artist'
     CACHE_TYPE = os.environ.get('CACHE_TYPE')
     CACHE_DIR = os.environ.get('CACHE_DIR')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 class ProdConfig(Config):

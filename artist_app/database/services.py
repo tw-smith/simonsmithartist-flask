@@ -1,5 +1,6 @@
 from artist_app import db
 from artist_app.database.models import Cart
+from artist_app.stripe_api.products_and_prices import get_price, get_product
 
 
 def create_cart() -> str:
@@ -9,25 +10,16 @@ def create_cart() -> str:
     return cart.public_id
 
 
-def get_cart(public_id: str) -> Cart:
+def get_cart(cart_id: str) -> Cart:
     cart = db.session.execute(
-        db.select(Cart).filter_by(public_id=public_id)
+        db.select(Cart).filter_by(public_id=cart_id)
     ).first()  #TODO not found
     return cart
 
 
-def get_cart_contents(public_id: str):
-    cart = get_cart(public_id)
+def get_cart_contents(cart_id: str):
+    cart = get_cart(cart_id)
     return cart.contents
-
-
-def add_item_to_cart():
-    pass
-
-
-
-def remove_item_from_cart():
-    pass
 
 
 
