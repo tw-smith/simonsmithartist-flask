@@ -8,19 +8,19 @@ from artist_app.stripe_api.products_and_prices import get_price, get_product
 
 class Cart(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    public_id: so.Mapped[str] = so.mapped_column(sa.String(60), index=True, default=str(uuid.uuid4()))
+    public_id: so.Mapped[str] = so.mapped_column(sa.String(60), index=True, unique=True)
     total: so.Mapped[float] = so.mapped_column(sa.Float, default=0.0)
     contents: so.Mapped[List["CartItem"]] = so.relationship(back_populates="parent_cart")
+
+    def __init__(self, public_id: str):
+        self.public_id = public_id
 
     def add_item_to_cart(self, product_id: str):
         cart_item: CartItem = self.search_cart_contents(product_id)
         if cart_item:
             cart_item.increase_quantity()
         else:
-            print("making new cart item")
             new_cart_item = CartItem(product_id, self.id)
-            print(new_cart_item)
-            print(new_cart_item.cart_id)
             db.session.add(new_cart_item)
         self.refresh_cart_total()
         db.session.commit()
@@ -32,6 +32,7 @@ class Cart(db.Model):
             cart_item.decrease_quantity()
         self.refresh_cart_total()
         db.session.commit()
+        return self.to_dict()
 
     def search_cart_contents(self, product_id: str):
         item = next((x for x in self.contents if x.product_id == product_id), None)
@@ -86,7 +87,12 @@ class CartItem(db.Model):
     def decrease_quantity(self):
         self.quantity -= 1
         if self.quantity < 0:
-            self.quantity = so.Mapped[0]
+            self.quantity = 0
+        if self.quantity == 0:
+            cart_item = db.session.get(CartItem, self.id)
+            db.session.delete(cart_item)
+            db.session.commit()
+
 
     def to_dict(self):
         return {
