@@ -8,5 +8,8 @@
         <p>{{ price_string }}</p>
         <p> {{ product.name }}</p>
         <p> {{ product.description }}</p>
+        <form action="/cart/add/{{ product.id }}" method="POST">
+            <button type="submit" id="checkout-button">Add to Cart</button>
+        </form>
     </div>
 {%  endblock %}

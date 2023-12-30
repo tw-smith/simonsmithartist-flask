@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="pagecontent-container">
+      <form action="/create-stripe-checkout-session" method="POST">
+        <button type="submit" id="checkout-button">Checkout</button>
+      </form>
+    </div>
+{%  endblock %}

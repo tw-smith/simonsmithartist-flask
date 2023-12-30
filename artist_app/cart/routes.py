@@ -26,5 +26,13 @@ def remove_item_from_cart(product_id):
     cart: Cart = get_cart_mapping(session['cart_id'])
     return cart.remove_item_from_cart(product_id)
 
+@bp.route('/cart', methods=['GET'])
+def get_cart():
+    cart_id = session.get('cart_id')
+    if cart_id is None:
+        return 'No cart exists'
+    cart: Cart = get_cart_mapping(cart_id)
+    return cart.to_dict()
+
     #return {'cart_total': session['cart'].get_cart_total()} # TODO handle strip no such product error
 

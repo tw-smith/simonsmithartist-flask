@@ -1,7 +1,18 @@
     <nav class="navbar">
         <a href="/"><h1 class="navbar__section navbar__item navbar__header pointer">Simon Smith</h1></a>
         <ul class="navbar__section">
-            <li id="hamburgerToggle" class="pointer">
+            <li id="cartIcon" class="pointer navbar__item">
+                <img src="../static/assets/icons8-basket-64.png"
+                     height="36px"
+                     width="36px"
+                     alt="Basket icon">
+                <img src="../static/assets/icons8-multiply-48.png"
+                     height="40px"
+                     width="40px"
+                     alt="Menu close icon"
+                     id="cartCloseIcon">
+            </li>
+            <li id="navIcon" class="pointer navbar__item">
                 <img src="../static/assets/icons8-hamburger-menu-48.png"
                      height="40px"
                      width="40px"
@@ -11,16 +22,15 @@
                      height="40px"
                      width="40px"
                      alt="Menu close icon"
-                     id="closeIcon">
+                     id="navCloseIcon">
             </li>
 
         </ul>
-        <ul class="hamburgerMenu">
-            <li class="navbar__item pointer content__text"><a href="/about">About</a></li>
-            <li class="navbar__item pointer content__text"><a href="/latest">Latest Paintings</a></li>
-            <li class="navbar__item pointer content__text">Acrylics & Oils</li>
-            <li class="navbar__item pointer content__text">Watercolours</li>
-            <li class="navbar__item pointer content__text">Contact</li>
+        <ul id="navMenu" class="modal">
+            {% include "navModal.html" %}
         </ul>
+        <div id="cartDetail" class="modal">
+            {% include "cartModal.html" %}
+        </div>
 
     </nav>

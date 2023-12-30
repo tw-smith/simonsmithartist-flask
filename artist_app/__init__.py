@@ -28,6 +28,9 @@ def create_app(config_class=Config):
     from artist_app.cart import bp as cart_bp
     app.register_blueprint(cart_bp)
 
+    from artist_app.stripe_api import bp as stripe_api_bp
+    app.register_blueprint(stripe_api_bp)
+
     if not app.debug and not app.testing:
 
         if not os.path.exists('logs'):
